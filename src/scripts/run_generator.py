@@ -34,8 +34,8 @@ def main() -> None:
         dataset = "appworld"
 
         logger.info("Running GeneratorAgent...")
-        logger.info(f"Query: {query}")
-        logger.info(f"Dataset: {dataset}")
+        logger.info("Query: %s", query)
+        logger.info("Dataset: %s", dataset)
 
         trajectory = generator.run(query, dataset)
 
@@ -43,19 +43,19 @@ def main() -> None:
         logger.info("=" * 60)
         logger.info("Trajectory Result")
         logger.info("=" * 60)
-        logger.info(f"Query: {trajectory.query}")
-        logger.info(f"Status: {trajectory.status}")
-        logger.info(f"Generated Answer: {trajectory.generated_answer}")
-        logger.info(f"Reasoning Steps ({len(trajectory.reasoning_steps)} steps):")
+        logger.info("Query: %s", trajectory.query)
+        logger.info("Status: %s", trajectory.status)
+        logger.info("Generated Answer: %s", trajectory.generated_answer)
+        logger.info("Reasoning Steps (%s steps):", len(trajectory.reasoning_steps))
         for i, step in enumerate(trajectory.reasoning_steps, start=1):
-            logger.info(f"  {i}. {step}")
-        logger.info(f"Used Bullet IDs: {trajectory.used_bullet_ids}")
+            logger.info("  %s. %s", i, step)
+        logger.info("Used Bullet IDs: %s", trajectory.used_bullet_ids)
         if trajectory.error_message:
-            logger.info(f"Error Message: {trajectory.error_message}")
+            logger.info("Error Message: %s", trajectory.error_message)
         logger.info("=" * 60)
 
-    except Exception as e:
-        logger.exception(f"Failed to run GeneratorAgent: {e}")
+    except Exception:
+        logger.exception("Failed to run GeneratorAgent")
         sys.exit(1)
 
 

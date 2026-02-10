@@ -3,8 +3,11 @@
 import json
 from datetime import datetime
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 from src.components.playbook_store.models import Playbook
+
+JST = ZoneInfo("Asia/Tokyo")
 
 
 class PlaybookStore:
@@ -42,5 +45,5 @@ class PlaybookStore:
         """
         self.data_dir.mkdir(parents=True, exist_ok=True)
         path = self.data_dir / f"{dataset}.json"
-        playbook.metadata.updated_at = datetime.now()
+        playbook.metadata.updated_at = datetime.now(tz=JST)
         path.write_text(playbook.model_dump_json(indent=2))

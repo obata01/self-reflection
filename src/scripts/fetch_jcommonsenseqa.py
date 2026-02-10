@@ -23,11 +23,11 @@ def main() -> None:
         logger.info("Dataset download completed successfully!")
         logger.info("=" * 50)
         for split, count in results.items():
-            logger.info(f"  {split}: {count} records")
+            logger.info("  %s: %s records", split, count)
         logger.info("=" * 50)
 
-    except Exception as e:
-        logger.error(f"Failed to download dataset: {e}")
+    except Exception:
+        logger.exception("Failed to download dataset")
         sys.exit(1)
 
 

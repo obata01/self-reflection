@@ -37,11 +37,11 @@ def main() -> None:
         dataset = "appworld"
 
         logger.info("Running GeneratorAgent to create Trajectory...")
-        logger.info(f"Query: {query}")
-        logger.info(f"Dataset: {dataset}")
+        logger.info("Query: %s", query)
+        logger.info("Dataset: %s", dataset)
 
         trajectory = generator.run(query, dataset)
-        logger.info(f"Trajectory created with status: {trajectory.status}")
+        logger.info("Trajectory created with status: %s", trajectory.status)
 
         # サンプルのground_truthとtest_report
         ground_truth = "富士山"
@@ -51,8 +51,8 @@ def main() -> None:
         reflector = container.reflector_agent()
 
         logger.info("Running ReflectorAgent...")
-        logger.info(f"Ground Truth: {ground_truth}")
-        logger.info(f"Test Report: {test_report}")
+        logger.info("Ground Truth: %s", ground_truth)
+        logger.info("Test Report: %s", test_report)
 
         reflection_result = reflector.run(
             trajectory=trajectory,
@@ -67,30 +67,30 @@ def main() -> None:
         logger.info("=" * 60)
 
         # Insights表示
-        logger.info(f"Insights ({len(reflection_result.insights)} items):")
+        logger.info("Insights (%s items):", len(reflection_result.insights))
         for i, insight in enumerate(reflection_result.insights, start=1):
-            logger.info(f"\n[Insight {i}]")
-            logger.info(f"  Key Insight: {insight.key_insight}")
-            logger.info(f"  Reasoning: {insight.reasoning}")
-            logger.info(f"  Error Identification: {insight.error_identification}")
-            logger.info(f"  Root Cause Analysis: {insight.root_cause_analysis}")
-            logger.info(f"  Correct Approach: {insight.correct_approach}")
+            logger.info("\n[Insight %s]", i)
+            logger.info("  Key Insight: %s", insight.key_insight)
+            logger.info("  Reasoning: %s", insight.reasoning)
+            logger.info("  Error Identification: %s", insight.error_identification)
+            logger.info("  Root Cause Analysis: %s", insight.root_cause_analysis)
+            logger.info("  Correct Approach: %s", insight.correct_approach)
 
         # BulletEvaluations表示
-        logger.info(f"\nBullet Evaluations ({len(reflection_result.bullet_evaluations)} items):")
-        for i, eval in enumerate(reflection_result.bullet_evaluations, start=1):
-            logger.info(f"\n[Evaluation {i}]")
-            logger.info(f"  Bullet ID: {eval.bullet_id}")
-            logger.info(f"  Tag: {eval.tag}")
-            logger.info(f"  Reason: {eval.reason}")
+        logger.info("\nBullet Evaluations (%s items):", len(reflection_result.bullet_evaluations))
+        for i, evaluation in enumerate(reflection_result.bullet_evaluations, start=1):
+            logger.info("\n[Evaluation %s]", i)
+            logger.info("  Bullet ID: %s", evaluation.bullet_id)
+            logger.info("  Tag: %s", evaluation.tag)
+            logger.info("  Reason: %s", evaluation.reason)
 
-        logger.info(f"\nTrajectory Query: {reflection_result.trajectory_query}")
-        logger.info(f"Trajectory Dataset: {reflection_result.trajectory_dataset}")
-        logger.info(f"Iteration Count: {reflection_result.iteration_count}")
+        logger.info("\nTrajectory Query: %s", reflection_result.trajectory_query)
+        logger.info("Trajectory Dataset: %s", reflection_result.trajectory_dataset)
+        logger.info("Iteration Count: %s", reflection_result.iteration_count)
         logger.info("=" * 60)
 
-    except Exception as e:
-        logger.exception(f"Failed to run ReflectorAgent: {e}")
+    except Exception:
+        logger.exception("Failed to run ReflectorAgent")
         sys.exit(1)
 
 

@@ -3,10 +3,12 @@
 import logging
 from typing import Any, TypeVar
 
+from langchain_aws import ChatBedrock
 from langchain_core.language_models import BaseChatModel
 from langchain_core.messages import AIMessage, BaseMessage
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
+from langchain_openai import AzureChatOpenAI, ChatOpenAI
 from pydantic import BaseModel
 
 logger = logging.getLogger(__name__)
@@ -29,16 +31,10 @@ def create_chat_model(provider: str, model: str, **kwargs) -> BaseChatModel:  # 
         ValueError: 未知のプロバイダが指定された場合
     """
     if provider == "openai":
-        from langchain_openai import ChatOpenAI
-
         return ChatOpenAI(model=model, **kwargs)
     if provider == "bedrock":
-        from langchain_aws import ChatBedrock
-
         return ChatBedrock(model_id=model, **kwargs)
     if provider == "azure":
-        from langchain_openai import AzureChatOpenAI
-
         return AzureChatOpenAI(model=model, **kwargs)
     msg = f"Unknown provider: {provider}"
     raise ValueError(msg)

@@ -29,7 +29,7 @@ class ReflectorPromptBuilder:
         """
         self.prompts_dir = Path(prompts_dir)
 
-    def build(
+    def build(  # noqa: PLR0913
         self,
         trajectory: Trajectory,
         ground_truth: str,
@@ -347,7 +347,7 @@ class ReflectorAgent:
                 iteration_count=0,
             )
 
-    def _extract_insights_iteratively(
+    def _extract_insights_iteratively(  # noqa: PLR0913
         self,
         trajectory: Trajectory,
         ground_truth: str,
@@ -389,7 +389,7 @@ class ReflectorAgent:
 
         return insights
 
-    def _extract_insights(
+    def _extract_insights(  # noqa: PLR0913
         self,
         trajectory: Trajectory,
         ground_truth: str,
@@ -429,7 +429,7 @@ class ReflectorAgent:
                 schema=InsightsResponse,
             )
 
-            return response.insights
+            return response.insights  # noqa: TRY300
 
         except Exception:
             logger.exception("Failed to extract insights")

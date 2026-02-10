@@ -1,6 +1,5 @@
 """JCommonsenseQA データセット取得・保存."""
 
-import json
 import logging
 import unicodedata
 from pathlib import Path
@@ -41,16 +40,16 @@ class DatasetLoader:
         results = {}
         for split in ["train", "validation"]:
             try:
-                logger.info(f"Fetching {split} split from Hugging Face...")
+                logger.info("Fetching %s split from Hugging Face...", split)
                 records = self._fetch_split(split)
-                logger.info(f"Fetched {len(records)} records from {split} split")
+                logger.info("Fetched %s records from %s split", len(records), split)
 
                 self._save_jsonl(records, split)
                 results[split] = len(records)
-                logger.info(f"Saved {split} split to {self.output_dir / f'{split}.jsonl'}")
+                logger.info("Saved %s split to %s", split, self.output_dir / f"{split}.jsonl")
 
-            except Exception as e:
-                logger.error(f"Failed to fetch {split} split: {e}")
+            except Exception:
+                logger.exception("Failed to fetch %s split", split)
                 raise
 
         return results

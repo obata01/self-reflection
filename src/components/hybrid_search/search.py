@@ -62,7 +62,7 @@ class HybridSearch:
         if query.section_filter:
             candidates = [b for b in candidates if b.section in query.section_filter]
         candidates = [b for b in candidates if b.confidence_score >= query.min_confidence]
-        return candidates
+        return candidates  # noqa: RET504
 
     def _vector_search(self, query_text: str, candidates: list[Bullet]) -> list[float]:
         """ベクトル近傍探索を実行してスコアを計算する.
@@ -84,7 +84,7 @@ class HybridSearch:
         scores = np.dot(doc_embeddings, query_embedding) / norms
 
         min_s, max_s = scores.min(), scores.max()
-        if max_s > min_s:
+        if max_s > min_s:  # noqa: SIM108
             scores = (scores - min_s) / (max_s - min_s)
         else:
             scores = np.ones_like(scores) * 0.5
@@ -107,7 +107,7 @@ class HybridSearch:
         scores = bm25.get_scores(tokenized_query)
 
         min_s, max_s = scores.min(), scores.max()
-        if max_s > min_s:
+        if max_s > min_s:  # noqa: SIM108
             scores = (scores - min_s) / (max_s - min_s)
         else:
             scores = np.ones_like(scores) * 0.5
@@ -131,7 +131,7 @@ class HybridSearch:
             SearchResultのリスト
         """
         results = []
-        for bullet, vs, bs in zip(candidates, vector_scores, bm25_scores):
+        for bullet, vs, bs in zip(candidates, vector_scores, bm25_scores, strict=True):
             combined = self.alpha * vs + (1 - self.alpha) * bs
             results.append(
                 SearchResult(

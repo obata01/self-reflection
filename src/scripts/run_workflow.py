@@ -29,6 +29,7 @@ from src.application.agents.curator import CuratorAgent
 from src.application.agents.generator import GeneratorAgent
 from src.application.agents.reflector import ReflectorAgent
 from src.common.config.settings import load_config
+from src.common.defs.curation import CurationResult
 from src.common.defs.insight import ReflectionResult
 from src.common.defs.trajectory import Trajectory
 from src.common.di.container import Container
@@ -100,7 +101,7 @@ def judge_answer(trajectory: Trajectory, record: QuestionRecord) -> bool:
     return record.correct_answer in trajectory.generated_answer
 
 
-def build_test_report(is_correct: bool, record: QuestionRecord) -> str:
+def build_test_report(is_correct: bool, record: QuestionRecord) -> str:  # noqa: FBT001
     """正誤判定結果からtest_report文字列を生成する."""
     if is_correct:
         return "正解"
@@ -122,7 +123,7 @@ def reflect(
     )
 
 
-def curate(curator: CuratorAgent, reflection_result: ReflectionResult):
+def curate(curator: CuratorAgent, reflection_result: ReflectionResult) -> CurationResult:
     """CuratorAgentでPlaybookを更新しCurationResultを返す."""
     return curator.run(
         reflection_result=reflection_result,
@@ -415,8 +416,8 @@ def main() -> None:
             curator = container.curator_agent()
             run_batch_curate(curator, limit=args.limit)
 
-    except Exception as e:
-        logger.exception("Workflow execution failed: %s", e)
+    except Exception:
+        logger.exception("Workflow execution failed")
         sys.exit(1)
 
 

@@ -52,10 +52,10 @@ class TaskLoader:
                     records.append(record)
                 except (json.JSONDecodeError, ValueError) as e:
                     msg = f"Failed to parse line {line_num} in {file_path}: {e}"
-                    logger.error(msg)
+                    logger.exception(msg)
                     raise ValueError(msg) from e
 
-        logger.info(f"Loaded {len(records)} records from {split} split")
+        logger.info("Loaded %s records from %s split", len(records), split)
         return records
 
     def evaluate(self, record: QuestionRecord, answer: str) -> bool:

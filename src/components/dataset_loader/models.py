@@ -36,7 +36,7 @@ class QuestionRecord(BaseModel):
         return getattr(self, f"choice{self.label}")
 
     def to_query(self) -> str:
-        """question + 選択肢をフォーマットしたクエリ文字列を返す.
+        """Question + 選択肢をフォーマットしたクエリ文字列を返す.
 
         Returns:
             フォーマット済みクエリ文字列

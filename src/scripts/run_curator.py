@@ -64,9 +64,9 @@ def main() -> None:
         curator = container.curator_agent()
 
         logger.info("Running CuratorAgent...")
-        logger.info(f"Dataset: {dataset}")
-        logger.info(f"Input Insights: {len(reflection_result.insights)} items")
-        logger.info(f"Input BulletEvaluations: {len(reflection_result.bullet_evaluations)} items")
+        logger.info("Dataset: %s", dataset)
+        logger.info("Input Insights: %s items", len(reflection_result.insights))
+        logger.info("Input BulletEvaluations: %s items", len(reflection_result.bullet_evaluations))
 
         curation_result = curator.run(
             reflection_result=reflection_result,
@@ -79,23 +79,23 @@ def main() -> None:
         logger.info("=" * 60)
 
         # Deltas表示
-        logger.info(f"Delta Context Items ({len(curation_result.deltas)} items):")
+        logger.info("Delta Context Items (%s items):", len(curation_result.deltas))
         for i, delta in enumerate(curation_result.deltas, start=1):
-            logger.info(f"\n[Delta {i}]")
-            logger.info(f"  Type: {delta.type}")
-            logger.info(f"  Section: {delta.section}")
-            logger.info(f"  Content: {delta.content}")
-            logger.info(f"  Reasoning: {delta.reasoning}")
+            logger.info("\n[Delta %s]", i)
+            logger.info("  Type: %s", delta.type)
+            logger.info("  Section: %s", delta.section)
+            logger.info("  Content: %s", delta.content)
+            logger.info("  Reasoning: %s", delta.reasoning)
             if delta.bullet_id:
-                logger.info(f"  Bullet ID: {delta.bullet_id}")
+                logger.info("  Bullet ID: %s", delta.bullet_id)
 
-        logger.info(f"\nBullets Before: {curation_result.bullets_before}")
-        logger.info(f"Bullets After: {curation_result.bullets_after}")
-        logger.info(f"Summary: {curation_result.summary}")
+        logger.info("\nBullets Before: %s", curation_result.bullets_before)
+        logger.info("Bullets After: %s", curation_result.bullets_after)
+        logger.info("Summary: %s", curation_result.summary)
         logger.info("=" * 60)
 
-    except Exception as e:
-        logger.exception(f"Failed to run CuratorAgent: {e}")
+    except Exception:
+        logger.exception("Failed to run CuratorAgent")
         sys.exit(1)
 
 

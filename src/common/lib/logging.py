@@ -3,7 +3,7 @@
 import logging
 
 
-def getLogger(name: str) -> logging.Logger:
+def getLogger(name: str) -> logging.Logger:  # noqa: N802
     """指定された名前のロガーを取得する.
 
     呼び出し時にlogging.basicConfig()を実行してから、ロガーを返す.

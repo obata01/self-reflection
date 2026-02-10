@@ -86,8 +86,8 @@ def _verify_llm_client(llm_client: LLMClient) -> None:
             {"question": "自己反省システムとは何ですか？"},
         )
         logger.info("   LLM応答（最初の100文字）: %s... ✓", response[:100])
-    except Exception as e:
-        logger.error("   LLMリクエストエラー: %s", e)
+    except Exception:
+        logger.exception("   LLMリクエストエラー")
 
 
 def _verify_workflow(
@@ -115,8 +115,8 @@ def _verify_workflow(
         )
         logger.info("   検索結果: %d件", len(result["search_results"]))
         logger.info("   LLM応答（最初の100文字）: %s... ✓", result["llm_response"][:100])
-    except Exception as e:
-        logger.error("   ワークフロー実行エラー: %s", e)
+    except Exception:
+        logger.exception("   ワークフロー実行エラー")
 
 
 def main() -> None:

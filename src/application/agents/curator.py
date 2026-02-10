@@ -8,7 +8,7 @@ from pathlib import Path
 import yaml
 
 from src.common.defs.curation import CurationResult, DeltasResponse
-from src.common.defs.insight import BulletEvaluation, Insight
+from src.common.defs.insight import BulletEvaluation, Insight, ReflectionResult
 from src.components.llm_client.client import LLMClient
 from src.components.playbook_store.models import Bullet, DeltaContextItem, Playbook
 from src.components.playbook_store.store import PlaybookStore
@@ -188,7 +188,7 @@ class CuratorAgent:
 
     def run(
         self,
-        reflection_result,
+        reflection_result: ReflectionResult,
         dataset: str,
     ) -> CurationResult:
         """ReflectionResultを基にPlaybookを更新しCurationResultを返す.
@@ -296,7 +296,7 @@ class CuratorAgent:
                 schema=DeltasResponse,
             )
 
-            return response.deltas
+            return response.deltas  # noqa: TRY300
 
         except Exception:
             logger.exception("Failed to generate deltas")
