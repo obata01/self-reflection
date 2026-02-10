@@ -1,0 +1,55 @@
+# LLMクライアント設定
+# _env サフィックスのフィールドは環境変数名として解釈される
+
+llms:
+  chat_clients:
+    bedrock:
+      - name: "sonnet"
+        config:
+          model_id: "us.anthropic.claude-sonnet-4-20250514"
+          region_name: "us-east-1"
+        default_params:
+          max_tokens: 8096
+      - name: "haiku"
+        config:
+          model_id: "us.anthropic.claude-haiku-4-20250506"
+          region_name: "us-east-1"
+        default_params:
+          max_tokens: 8096
+    azure:
+      - name: "gpt-4o"
+        config:
+          model: "gpt-4o"
+          azure_deployment: "gpt-4o"
+          azure_endpoint_env: "AZURE_OPENAI_ENDPOINT"
+          api_key_env: "AZURE_OPENAI_API_KEY"
+          openai_api_version: "2024-12-01-preview"
+        default_params:
+          temperature: 0.5
+          max_tokens: 4096
+      - name: "gpt-4.1"
+        config:
+          model: "gpt-4.1"
+          azure_deployment: "gpt-4.1"
+          azure_endpoint_env: "AZURE_OPENAI_ENDPOINT"
+          api_key_env: "AZURE_OPENAI_API_KEY"
+          openai_api_version: "2024-12-01-preview"
+        default_params:
+          temperature: 0.5
+          max_tokens: 16384
+      - name: "gpt-4.1-mini"
+        config:
+          model: "gpt-4.1-mini"
+          azure_deployment: "gpt-4.1-mini"
+          azure_endpoint_env: "AZURE_OPENAI_ENDPOINT"
+          api_key_env: "AZURE_OPENAI_API_KEY"
+          openai_api_version: "2024-12-01-preview"
+        default_params:
+          temperature: 0.5
+          max_tokens: 16384
+    openai:
+      - name: "openai-gpt-4.1-mini"
+        config:
+          model: "gpt-4.1-mini"
+          api_key_env: "OPENAI_API_KEY"
+        default_params: {}

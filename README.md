@@ -45,4 +45,30 @@ python src/scripts/run_workflow.py --mode infer --limit 10
 |---|---|---|
 | `--mode infer` | 推論+正解率のみ | - |
 | `--mode full` | Reflect/Curateを含むフルパイプライン | `full` |
-| `--limit N` | 処理する問題数 | `5` |
+| `--mode batch-infer` | 全件推論し結果をファイルに保存 | - |
+| `--mode batch-reflect` | 保存済み推論結果から全件リフレクション | - |
+| `--mode batch-curate` | 保存済みリフレクション結果から全件キュレーション | - |
+| `--limit N` | 処理する問題数 (`infer`/`full`: 5, `batch-*`: 全件) | モードによる |
+
+### ステージ別バッチ実行
+
+各ステージの中間結果をファイルに保存し、ステージごとに独立して実行できます。
+
+```bash
+# 1. 全件推論 → data/results/jcommonsenseqa/infer.jsonl に保存
+python src/scripts/run_workflow.py --mode batch-infer
+
+# 2. 推論結果を読み込みリフレクション → data/results/jcommonsenseqa/reflect.jsonl に保存
+python src/scripts/run_workflow.py --mode batch-reflect
+
+# 3. リフレクション結果を読み込みキュレーション → Playbook更新
+python src/scripts/run_workflow.py --mode batch-curate
+```
+
+`--limit` で件数を絞ってテストすることもできます。
+
+```bash
+python src/scripts/run_workflow.py --mode batch-infer --limit 10
+python src/scripts/run_workflow.py --mode batch-reflect --limit 10
+python src/scripts/run_workflow.py --mode batch-curate --limit 10
+```

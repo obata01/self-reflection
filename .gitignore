@@ -23,3 +23,5 @@ dist/
 db/
 docs/
 data/datasets/jcommonsenseqa/
+data/results/
+.hypothesis

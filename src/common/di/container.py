@@ -1,6 +1,7 @@
 """依存性注入コンテナの定義."""
 
 from dependency_injector import containers, providers
+from langchain_core.language_models import BaseChatModel
 from langchain_openai import OpenAIEmbeddings
 
 from src.application.agents.curator import CuratorAgent, CuratorPromptBuilder
@@ -8,6 +9,10 @@ from src.application.agents.generator import GeneratorAgent, PromptBuilder
 from src.application.agents.reflector import (
     ReflectorAgent,
     ReflectorPromptBuilder,
+)
+from src.common.config.app_config_loader import (
+    AppConfigLoader,
+    build_chat_model_registry,
 )
 from src.components.hybrid_search.embedding_client import EmbeddingClient
 from src.components.hybrid_search.search import HybridSearch
@@ -25,6 +30,19 @@ class Container(containers.DeclarativeContainer):
         provider=config.llm["provider"],
         model=config.llm["model"],
         api_key=config.llm["api_key"],
+    )
+
+    # YAML設定ローダー
+    app_config_loader = providers.Singleton(AppConfigLoader)
+    app_yaml_config = providers.Singleton(
+        lambda loader: loader.load(),
+        app_config_loader,
+    )
+
+    # ChatModelレジストリ（名前ベース）
+    chat_model_registry = providers.Singleton(
+        build_chat_model_registry,
+        app_yaml_config,
     )
 
     embedding_model = providers.Singleton(
@@ -90,3 +108,19 @@ class Container(containers.DeclarativeContainer):
         prompt_builder=curator_prompt_builder,
         playbook_store=playbook_store,
     )
+
+
+
+def get_chat_model(container: Container, name: str) -> BaseChatModel:
+    """名前を指定してChatModelを取得する."""
+    registry = container.chat_model_registry()
+    if name not in registry:
+        available = list(registry.keys())
+        msg = f"ChatModel '{name}' が見つからない. 利用可能: {available}"
+        raise KeyError(msg)
+    return registry[name]
+
+
+def get_llm_client(container: Container, name: str) -> LLMClient:
+    """名前を指定してLLMClientを取得する."""
+    return LLMClient(chat_model=get_chat_model(container, name))

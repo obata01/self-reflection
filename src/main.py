@@ -1,11 +1,15 @@
 """FastAPIアプリケーションのエントリポイント."""
 
+import logging
+
 from fastapi import FastAPI
 
 from src.application.workflows.reflection_workflow import ReflectionWorkflow
 from src.common.config.settings import load_config
 from src.common.di.container import Container
 from src.common.schema.api import WorkflowRequest, WorkflowResponse
+
+logger = logging.getLogger(__name__)
 
 
 def create_app() -> FastAPI:
@@ -19,6 +23,14 @@ def create_app() -> FastAPI:
     container = Container()
     config = load_config()
     container.config.from_dict(config.model_dump())
+
+    # YAML設定ベースのChatModelレジストリを初期化
+    try:
+        registry = container.chat_model_registry()
+        logger.info("ChatModelレジストリ初期化完了: %s", list(registry.keys()))
+    except FileNotFoundError:
+        logger.warning("config/app.yaml が見つからないため、レジストリは未初期化")
+
     app.state.container = container
 
     return app
