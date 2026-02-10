@@ -1,0 +1,31 @@
+# Bulletの分類に使用するセクション定義
+# データセットごとにセクション名と説明を記述
+
+appworld:
+  - name: strategies_and_hard_rules
+    description: タスク実行における戦略や必須ルール
+  - name: error_recovery
+    description: エラー発生時のリカバリー手法
+  - name: api_usage_patterns
+    description: API呼び出しのパターンと注意点
+  - name: temporal_handling
+    description: 時間や日時の取り扱い方法
+  - name: edge_cases
+    description: エッジケースや特殊な状況への対処
+
+jcommonsenseqa:
+  - name: strategies_and_hard_rules
+    description: タスク実行における戦略や必須ルール. タスク全体に共通する「回答の手順」や「思考プロセス」を格納する. 役割は「どのように問題を解くかの指針」.
+  - name: common_pitfalls_and_distractors
+    description: よくある間違いとひっかけ. 失敗から学んだ「避けるべきパターン」をここに格納する. 役割は「何をしてはいけないか」.
+  - name: causal_and_social_reasoning
+    description: 因果関係と社会的推論. ドメイン特有の知識エリア. 役割は「正解に必要な具体的なドメイン知識」.
+  - name: linguistic_nuances 
+    description: 日本語特有の慣用句や、同音異義語に関する知識を管理する. 役割は「言語処理特有のエラー対策」.
+
+# 追加のデータセット例
+# other_dataset:
+#   - name: section_a
+#     description: セクションAの説明
+#   - name: section_b
+#     description: セクションBの説明

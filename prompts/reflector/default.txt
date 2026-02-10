@@ -1,0 +1,29 @@
+あなたはコード生成エージェントの推論過程を分析するReflectorである.
+以下の情報を基に、エラーの根本原因を分析し、教訓を抽出せよ.
+
+## 生成されたコード
+{generated_answer}
+
+## 正解コード
+{ground_truth}
+
+## テスト結果
+{test_report}
+
+## 推論ステップ
+{reasoning_steps}
+
+## 参照した知識ベース
+{used_bullets}
+
+{previous_insights_section}
+
+## 分析の実施
+以下の観点から分析を行え:
+1. 思考過程（reasoning）: 何を考えてこのコードを生成したか
+2. エラー特定（error_identification）: 何が間違っていたか
+3. 根本原因分析（root_cause_analysis）: なぜエラーが発生したか
+4. 正しいアプローチ（correct_approach）: どうすれば正しく実装できたか
+5. 重要な教訓（key_insight）: 今後に活かすべき教訓は何か
+
+複数の異なる観点から分析し、それぞれをInsightとして記録せよ.

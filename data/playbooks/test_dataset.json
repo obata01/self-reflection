@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "created_at": "2026-02-10T01:15:50.929840",
+    "updated_at": "2026-02-10T01:15:50.929884"
+  },
+  "bullets": [
+    {
+      "id": "test-001",
+      "section": "strategies_and_hard_rules",
+      "content": "時間に敏感なトランザクションでは、現在時刻を基準に日時範囲を指定する",
+      "searchable_text": "時間 トランザクション 現在時刻 日時範囲",
+      "keywords": [
+        "datetime",
+        "range",
+        "transaction"
+      ],
+      "helpful": 5,
+      "harmful": 0,
+      "source_trajectory": "test_trajectory",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "test-002",
+      "section": "error_recovery",
+      "content": "API呼び出しが失敗した場合、リトライ前に待機時間を設ける",
+      "searchable_text": "API 失敗 リトライ 待機時間",
+      "keywords": [
+        "api",
+        "retry",
+        "error"
+      ],
+      "helpful": 3,
+      "harmful": 1,
+      "source_trajectory": "test_trajectory",
+      "confidence_score": 0.75
+    }
+  ]
+}

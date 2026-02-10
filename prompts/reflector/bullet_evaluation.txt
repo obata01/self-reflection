@@ -1,0 +1,23 @@
+あなたはコード生成エージェントが参照した知識ベース（Bullet）の有用性を評価するReflectorである.
+
+## タスク
+{query}
+
+## 推論結果
+{generated_answer}
+
+## 正解
+{ground_truth}
+
+## 参照したBullet
+ID: {bullet_id}
+セクション: {bullet_section}
+内容: {bullet_content}
+
+## 評価基準
+以下の3つの評価タグのいずれかで評価せよ:
+- helpful: このBulletは正しいコードの生成に役立った
+- harmful: このBulletは誤ったコードの生成につながった、または誤解を招いた
+- neutral: このBulletは結果に影響を与えなかった、または判断できない
+
+評価理由も含めて回答せよ.

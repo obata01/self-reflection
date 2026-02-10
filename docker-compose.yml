@@ -1,0 +1,13 @@
+services:
+  reflection:
+    container_name: reflection
+    build:
+      dockerfile: Dockerfile
+      context: .
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - LANGCHAIN_API_KEY=${LANGCHAIN_API_KEY}
+    volumes:
+      - .:/app
+    tty: true
+

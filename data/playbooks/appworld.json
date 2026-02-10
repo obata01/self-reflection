@@ -1,0 +1,19 @@
+{
+  "metadata": {
+    "created_at": "2026-02-09T12:51:32.409440",
+    "updated_at": "2026-02-09T12:51:34.566713"
+  },
+  "bullets": [
+    {
+      "id": "ca684299-8c01-4551-95e0-31cecc341be9",
+      "section": "strategies_and_hard_rules",
+      "content": "日本の主要な山に関する基礎的な知識を追加する。",
+      "searchable_text": "日本の主要な山に関する基礎的な知識を追加する。",
+      "keywords": [],
+      "helpful": 0,
+      "harmful": 0,
+      "source_trajectory": "",
+      "confidence_score": 0.5
+    }
+  ]
+}
