@@ -1,6 +1,6 @@
 """JCommonsenseQA データモデル定義."""
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 
 class QuestionRecord(BaseModel):
@@ -25,6 +25,11 @@ class QuestionRecord(BaseModel):
     choice3: str
     choice4: str
     label: int = Field(ge=0, le=4)
+
+    @field_validator("q_id", mode="before")
+    @classmethod
+    def _coerce_q_id_to_str(cls, v: object) -> str:
+        return str(v)
 
     @property
     def correct_answer(self) -> str:
