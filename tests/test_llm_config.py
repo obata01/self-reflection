@@ -201,7 +201,7 @@ def test_loader_loads_valid_yaml(tmp_path):
                     {
                         "name": "test-model",
                         "config": {"model_id": "test", "region_name": "us-east-1"},
-                        "default_params": {"max_tokens": 1024},
+                        "default_params": {"max_tokens": 1024, "top_p": 0.9},
                     },
                 ],
             },
@@ -217,6 +217,7 @@ def test_loader_loads_valid_yaml(tmp_path):
     assert result.llms.chat_clients.bedrock[0].name == "test-model"
     assert result.llms.chat_clients.bedrock[0].config["model_id"] == "test"
     assert result.llms.chat_clients.bedrock[0].default_params["max_tokens"] == 1024
+    assert result.llms.chat_clients.bedrock[0].default_params["top_p"] == 0.9
 
 
 def test_loader_invalid_yaml_syntax(tmp_path):
@@ -250,10 +251,11 @@ def test_bedrock_config_structure():
     entry = ChatClientEntry(
         name="sonnet",
         config={"model_id": "anthropic.claude-v2", "region_name": "us-east-1"},
-        default_params={"max_tokens": 1024},
+        default_params={"max_tokens": 1024, "top_p": 0.9},
     )
     assert "model_id" in entry.config
     assert "region_name" in entry.config
+    assert entry.default_params["top_p"] == 0.9
 
 
 def test_azure_config_structure():
